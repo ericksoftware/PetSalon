@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Salon</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <header>
+        <h1>🐾 Pet Salon 🐾</h1>
+        <p>The best care for your furry friends!</p>
+    </header>
+
+    <main>
+        <section class="info">
+            <h2>Total Registered Pets: <span id="pet-count">0</span></h2>
+            <h2>Average Age: <span id="avg-age">0</span></h2>
+            <button onclick="addRandomPet()">➕ Add Random Pet</button>
+        </section>
+
+        <section class="pet-container" id="pet-container">
+            <!-- Pets will be displayed here dynamically -->
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Pet Salon | Professional pet care 🐶🐱</p>
+    </footer>
+
+    <script src="./scripts/index.js"></script>
+</body>
+</html>
