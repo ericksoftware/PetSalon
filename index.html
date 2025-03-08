@@ -8,8 +8,12 @@
 </head>
 <body>
     <header>
-        <h1>🐾 Pet Salon 🐾</h1>
+        <a href="index.html"><h1>🐾 Pet Salon 🐾</h1></a>
         <p>The best care for your furry friends!</p>
+        <div>
+            <a href="register.html">Register</a>
+            <a href="index.html">Home</a>
+        </div>
     </header>
 
     <main>
@@ -18,30 +22,11 @@
             <h2>Average Age: <span id="avg-age">0</span></h2>
         </section>
     
-        <section>
-            <h2>Register a Pet</h2>
-            <form id="pet-form" onsubmit="registerPet(event)">
-                <input type="text" id="pet-name" placeholder="Pet Name" required>
-                <input type="number" id="pet-age" placeholder="Age" required>
-                <select id="pet-gender">
-                    <option value="" disabled selected>Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-                <input type="text" id="pet-breed" placeholder="Breed" required>
-                <input type="text" id="pet-service" placeholder="Service" required>
-                <select id="pet-type">
-                    <option value="" disabled selected>Type</option>
-                    <option value="Dog">Dog</option>
-                    <option value="Cat">Cat</option>
-                    <option value="Other">Other</option>
-                </select>
-                <button type="submit">Register Pet</button>
-            </form>
-        </section>
+
     
         <section class="pet-container" id="pet-container">
         </section>
+
     </main>
     
 

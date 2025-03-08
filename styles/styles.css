@@ -19,8 +19,14 @@ header {
     height: 100px; 
 }
 
+header a{
+    color: white;
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
 header p {
-    flex-grow: 1; 
+    flex-grow:1 ; 
     text-align: center;
     margin-right: 200px; 
 }
@@ -89,3 +95,22 @@ footer {
     font-size: 0.9rem;
 }
 
+.pet-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select, button {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
