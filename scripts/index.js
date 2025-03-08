@@ -1,55 +1,84 @@
+// Salon Object
+let salon = {
+    name: "Pet Salon",
+    pets: []
+};
 
-let pets = [
-    { name: "Buddy", age: 3, gender: "Male", service: "Grooming", breed: "Golden Retriever" },
-    { name: "Misty", age: 2, gender: "Female", service: "Nail Trim", breed: "Siamese" },
-    { name: "Rocky", age: 4, gender: "Male", service: "Bath", breed: "Bulldog" }
-];
+class Pet {
+    constructor(name, age, gender, breed, service, type) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.breed = breed;
+        this.service = service;
+        this.type = type;
+    }
+}
+
+function registerPet(event) {
+    event.preventDefault(); // Prevent form reload
+
+    let name = document.getElementById("pet-name").value;
+    let age = parseInt(document.getElementById("pet-age").value);
+    let gender = document.getElementById("pet-gender").value;
+    let breed = document.getElementById("pet-breed").value;
+    let service = document.getElementById("pet-service").value;
+    let type = document.getElementById("pet-type").value;
+
+    if (!name || !age || !gender || !breed || !service || !type) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    let newPet = new Pet(name, age, gender, breed, service, type);
+    salon.pets.push(newPet);
+
+    updatePetCount();
+    displayPets();
+    calculateAverageAge();
+    clearForm();
+}
+
+function clearForm() {
+    document.getElementById("pet-form").reset();
+}
 
 function updatePetCount() {
-    document.getElementById("pet-count").textContent = pets.length;
+    document.getElementById("pet-count").textContent = salon.pets.length;
 }
 
 function displayPets() {
     let container = document.getElementById("pet-container");
     container.innerHTML = ""; // Clear previous content
 
-    pets.forEach(pet => {
+    salon.pets.forEach(pet => {
         let petCard = document.createElement("div");
         petCard.classList.add("pet-card");
         petCard.innerHTML = `
             <h3>${pet.name}</h3>
             <p><strong>Age:</strong> ${pet.age} years</p>
             <p><strong>Gender:</strong> ${pet.gender}</p>
-            <p><strong>Service:</strong> ${pet.service}</p>
             <p><strong>Breed:</strong> ${pet.breed}</p>
+            <p><strong>Service:</strong> ${pet.service}</p>
+            <p><strong>Type:</strong> ${pet.type}</p>
         `;
         container.appendChild(petCard);
     });
 }
 
 function calculateAverageAge() {
-    let totalAge = pets.reduce((sum, pet) => sum + pet.age, 0);
-    let avgAge = pets.length > 0 ? (totalAge / pets.length).toFixed(1) : 0;
+    let totalAge = salon.pets.reduce((sum, pet) => sum + pet.age, 0);
+    let avgAge = salon.pets.length > 0 ? (totalAge / salon.pets.length).toFixed(1) : 0;
     document.getElementById("avg-age").textContent = avgAge;
 }
 
-function addRandomPet() {
-    let randomPets = [
-        { name: "Luna", age: 1, gender: "Female", service: "Bath", breed: "Poodle" },
-        { name: "Thor", age: 5, gender: "Male", service: "Haircut", breed: "Husky" },
-        { name: "Coco", age: 2, gender: "Male", service: "Vaccination", breed: "Chihuahua" },
-        { name: "Bella", age: 3, gender: "Female", service: "Grooming", breed: "Labrador" },
-        { name: "Simba", age: 4, gender: "Male", service: "Bath", breed: "Persian Cat" }
-    ];
-
-    let newPet = randomPets[Math.floor(Math.random() * randomPets.length)];
-    pets.push(newPet);
-    updatePetCount();
-    displayPets();
-    calculateAverageAge();
-}
-
 function init() {
+    let pet1 = new Pet("Buddy", 3, "Male", "Golden Retriever", "Grooming", "Dog");
+    let pet2 = new Pet("Misty", 2, "Female", "Siamese", "Nail Trim", "Cat");
+    let pet3 = new Pet("Rocky", 4, "Male", "Bulldog", "Bath", "Dog");
+
+    salon.pets.push(pet1, pet2, pet3);
+
     updatePetCount();
     displayPets();
     calculateAverageAge();
