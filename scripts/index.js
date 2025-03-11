@@ -43,7 +43,7 @@ function registerPet(event) {
         }
 
         updatePetCount();
-        displayPets();
+        displayRow();
         calculateAverageAge();
         clearInput();
         displayInfo(); 
@@ -58,7 +58,6 @@ function isValid(pet){
         valid = false;
     }
 
-
     return valid;
 }
 
@@ -70,24 +69,25 @@ function updatePetCount() {
     document.getElementById("pet-count").textContent = salon.pets.length;
 }
 
-function displayPets() {
-    let container = document.getElementById("pet-container");
-    container.innerHTML = ""; // Clear previous content
+function displayRow() {
+    let tableBody = document.getElementById("pet-table-body");
+    tableBody.innerHTML = ""; // Clear previous content
 
     salon.pets.forEach((pet, index) => {
-        let petCard = document.createElement("div");
-        petCard.classList.add("pet-card");
-        petCard.innerHTML = `
-            <h3>${pet.name}</h3>
-            <p><strong>Age:</strong> ${pet.age} years</p>
-            <p><strong>Gender:</strong> ${pet.gender}</p>
-            <p><strong>Breed:</strong> ${pet.breed}</p>
-            <p><strong>Service:</strong> ${pet.service}</p>
-            <p><strong>Type:</strong> ${pet.type}</p>
-            <button onclick="removePet(${index})">Remove</button>
-            <button onclick="editPet(${index})">Edit</button>
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${pet.name}</td>
+            <td>${pet.age}</td>
+            <td>${pet.gender}</td>
+            <td>${pet.breed}</td>
+            <td>${pet.service}</td>
+            <td>${pet.type}</td>
+            <td>
+                <button onclick="removePet(${index})">Remove</button>
+                <button onclick="editPet(${index})">Edit</button>
+            </td>
         `;
-        container.appendChild(petCard);
+        tableBody.appendChild(row);
     });
 }
 
@@ -100,7 +100,7 @@ function calculateAverageAge() {
 function removePet(index) {
     salon.pets.splice(index, 1);
     updatePetCount();
-    displayPets();
+    displayRow();
     calculateAverageAge();
     displayInfo(); 
 }
@@ -117,7 +117,6 @@ function editPet(index) {
     document.getElementById("pet-type").value = pet.type;
 }
 
-
 function init() {
     let pet1 = new Pet("Buddy", 3, "Male", "Golden Retriever", "Grooming", "Dog");
     let pet2 = new Pet("Misty", 2, "Female", "Siamese", "Nail Trim", "Cat");
@@ -126,7 +125,7 @@ function init() {
     salon.pets.push(pet1, pet2, pet3);
 
     updatePetCount();
-    displayPets();
+    displayRow();
     calculateAverageAge();
     displayInfo();
 }
