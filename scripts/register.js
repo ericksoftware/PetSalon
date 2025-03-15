@@ -29,7 +29,7 @@ function registerPet(event) {
     let service = document.getElementById("pet-service").value;
     let type = document.getElementById("pet-type").value;
     let color = document.getElementById("pet-color").value; // New field
-    let payment = document.getElementById("pet-payment").value; // New field
+    let payment = document.getElementById("payment-method").value; // New field
 
     if (!name || !age || !gender || !breed || !service || !type || !color || !payment) {
         alert("Please fill in all fields.");
@@ -138,17 +138,31 @@ function init() {
     displayInfo();
 }
 
-function displayInfo(){
-    let groomingDiv = document.getElementById("gTotal");
-
+function displayInfo() {
+    // Contadores para cada servicio
     let groomingTotal = 0;
-    for(let i = 0; i < salon.pets.length; i++){
-        if(salon.pets[i].service === "Grooming"){
-            groomingTotal++;
+    let nailTrimTotal = 0;
+    let bathTotal = 0;
+
+    // Iterar sobre las mascotas y contar los servicios
+    for (let i = 0; i < salon.pets.length; i++) {
+        switch (salon.pets[i].service) {
+            case "Grooming":
+                groomingTotal++;
+                break;
+            case "Nail Trim":
+                nailTrimTotal++;
+                break;
+            case "Bath":
+                bathTotal++;
+                break;
         }
     }
 
-    groomingDiv.innerHTML = groomingTotal;
+    // Mostrar los totales en la pantalla
+    document.getElementById("gTotal").textContent = groomingTotal;
+    document.getElementById("nTotal").textContent = nailTrimTotal;
+    document.getElementById("bTotal").textContent = bathTotal;
 }
 
 window.onload = init;

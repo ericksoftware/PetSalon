@@ -1,116 +1,96 @@
-/* General styles */
+/* General Styles */
 body {
     font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
+    background-color: #d8ecff;
     color: #333;
-    text-align: center;
 }
 
 header {
-    display: flex;
-    align-items: center;  
-    justify-content: space-between; 
-    background: #ff6b6b;
-    color: white;
-    padding: 20px;
-    font-size: 1.2rem;
-    height: 100px; 
+    background: linear-gradient(90deg, #007bff, #00a8ff);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-header a{
-    color: white;
-    text-decoration: none;
-    margin-right: 1rem;
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
 }
 
-header p {
-    flex-grow:1 ; 
-    text-align: center;
-    margin-right: 200px; 
+.h2{
+    color: #220a8f;
 }
 
-/* General Info Section */
-.info {
-    margin: 20px auto;
-    max-width: 800px;
-    padding: 10px;
+.p{
+    color: #8750bb;
 }
 
-button {
-    background: #ff6b6b;
-    color: white;
-    padding: 10px 20px;
+
+.btn-primary {
+    background-color: #007bff;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s ease-in-out;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background: #e65c5c;
+.btn-primary:hover {
+    background-color: #0056b3;
 }
 
-/* Pets Container */
-.pet-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    max-width: 1000px;
-    margin: auto;
-    padding: 20px;
+.btn-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Pet Cards */
-.pet-card {
-    background: white;
-    padding: 15px;
+/* Hero Section */
+.hero-section {
+    background-color: #d8ecff;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 100px 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+    margin-bottom: 40px;
 }
 
-.pet-card:hover {
-    transform: scale(1.05);
+/* Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.pet-card h3 {
-    margin: 10px 0;
-    color: #ff6b6b;
+.card:hover {
+    transform: translateY(-5px);
 }
 
-.pet-card p {
-    margin: 5px 0;
+/* Centered Card Content */
+.centered-card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.h {
+    box-shadow: 4px 8px 12px rgba(0, 0, 0, .1);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
     font-size: 1rem;
+    color: #666;
+}
+
+/* Gallery Images */
+.img-fluid {
+    border-radius: 10px;
 }
 
 /* Footer */
 footer {
-    margin-top: 20px;
-    background: #222;
-    color: white;
-    padding: 10px;
-    font-size: 0.9rem;
-}
-
-.pet-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
-    margin: auto;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-input, select, button {
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    background: linear-gradient(90deg, #007bff, #00a8ff);
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
