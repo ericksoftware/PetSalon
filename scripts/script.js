@@ -1,115 +1,195 @@
-// console.log('Hello, world!');
+// Salon Object
+let salon = {
+    name: "Pet Salon",
+    pets: []
+};
 
-// // global variable
-// let globalVar = 'I am a global variable';
-
-// function exampleFunction() {
-//   // local variable
-//   let localVar = 'I am a local variable';
-//   console.log(globalVar);
-//   console.log(localVar);
-//   if (true) {
-//     var blockVar = 'I am a block variable';
-//     console.log(blockVar);
-//   }
-// }
-
-// exampleFunction();
-
-// // arrays
-
-// let fruits = ['apple', 'banana', 'orange'];
-// console.log(`This is an array: ${fruits}`);
-// console.table(fruits);
-
-// console.log(fruits[0]);
-// console.log(fruits[1]);
-// console.log(fruits[2]);
-
-// fruits[1] = 'cherry';
-// console.table(fruits);
-
-// // array length
-// console.log(fruits.length);
-
-// // add and remove elements
-// fruits.push('mango');
-// console.table(fruits);
-
-// fruits.pop();
-// fruits.pop();
-
-// console.table(fruits);
-
-// fruits.unshift('mango');
-// console.table(fruits);
-
-// fruits.shift();
-// console.table(fruits);
-
-// // create an array of five students names
-// let students = ['Erick', 'George', 'Jeffrey', 'Rafael', 'Isai'];
-
-// for (let i = 0; i < students.length; i++) {
-//   console.log(students[i]);
-// }
-
-// let person = {
-//   name: 'Erick',
-//   lastName: 'Vazquez',
-//   age: 25,
-//   isStudent: false,
-// };
-
-
-// // access to properties of an object
-// console.log(person.name);
-// console.log(person.lastName);
-// console.log(person['age']);
-// console.log(person.isStudent);
-
-let student1 = {
-    name: 'Juan',
-    email:"juan@gmail.com",
-    age: 25,
-    adress: "Calle 123"
-}
-
-// create another 3 students
-let student2 = {
-    name: 'Maria',
-    email:"maria@gmail.com",
-    age: 42,
-    adress: "Calle 456"
-}
-
-let student3 = {
-    name: 'Pedro',
-    email:"pedro@gmail.com",
-    age: 32,
-    adress: "Calle 789"
-}
-
-let student4 = {
-    name: 'Ana',
-    email:"ana@gmail.com",
-    age: 19,
-    adress: "Calle 1011"
-}
-
-let studentList = [student1, student2, student3, student4];
-console.log("Student list: " + studentList.length);
-
-document.getElementById("studentsCounter").innerHTML= "Total of students= " + studentList.length + " in the system";
-
-console.log(`email: ${studentList[1].email}, adress: ${studentList[1].adress}`);
-
-function getStudentsNames() {
-    let list = document.getElementById('studentsNames');
-    for (let i = 0; i < studentList.length; i++) {
-        console.log(studentList[i].name);
-        list.innerHTML += `<li>${studentList[i].name}</li>`;
+class Pet {
+    constructor(name, age, gender, breed, service, type, color, payment) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.breed = breed;
+        this.service = service;
+        this.type = type;
+        this.color = color;
+        this.payment = payment;
     }
 }
 
-getStudentsNames();
+let editIndex = -1;
+
+function registerPet(event) {
+    event.preventDefault(); // Prevent form submission
+
+    let name = $("#pet-name").val();
+    let age = parseInt($("#pet-age").val());
+    let gender = $("#pet-gender").val();
+    let breed = $("#pet-breed").val();
+    let service = $("#pet-service").val();
+    let type = $("#pet-type").val();
+    let color = $("#pet-color").val();
+    let payment = $("#payment-method").val();
+
+    if (!name || !age || !gender || !breed || !service || !type || !color || !payment) {
+        showNotification("Please fill in all fields.", "error");
+        return;
+    }
+
+    let newPet = new Pet(name, age, gender, breed, service, type, color, payment);
+
+    if (isValid(newPet)) {
+        if (editIndex === -1) {
+            salon.pets.push(newPet);
+            showNotification("Pet registered successfully!", "success");
+        } else {
+            salon.pets[editIndex] = newPet;
+            editIndex = -1;
+            showNotification("Pet updated successfully!", "success");
+        }
+
+        updatePetCount();
+        displayRow();
+        calculateAverageAge();
+        clearInput();
+        displayInfo();
+    } else {
+        showNotification("Invalid pet details. Please check your inputs.", "error");
+    }
+}
+
+// Validate Pet Function
+function isValid(pet) {
+    return pet.name.trim() !== "" && !isNaN(pet.age) && pet.age > 0;
+}
+
+// Clear Input Fields
+function clearInput() {
+    $("#pet-form")[0].reset();
+}
+
+// Update Pet Count
+function updatePetCount() {
+    $("#pet-count").text(salon.pets.length);
+}
+
+// Display Pets in Table
+function displayRow() {
+    let tableBody = $("#pet-table-body");
+    tableBody.empty(); // Clear previous content
+
+    salon.pets.forEach((pet, index) => {
+        let row = `
+            <tr>
+                <td>${pet.name}</td>
+                <td>${pet.age}</td>
+                <td>${pet.gender}</td>
+                <td>${pet.breed}</td>
+                <td>${pet.service}</td>
+                <td>${pet.type}</td>
+                <td>${pet.color}</td>
+                <td>${pet.payment}</td>
+                <td>
+                    <button onclick="removePet(${index})" class="btn btn-danger btn-sm">Remove</button>
+                    <button onclick="editPet(${index})" class="btn btn-warning btn-sm">Edit</button>
+                </td>
+            </tr>
+        `;
+        tableBody.append(row);
+    });
+}
+
+// Calculate Average Age
+function calculateAverageAge() {
+    let totalAge = salon.pets.reduce((sum, pet) => sum + pet.age, 0);
+    let avgAge = salon.pets.length > 0 ? (totalAge / salon.pets.length).toFixed(1) : 0;
+    $("#avg-age").text(avgAge);
+}
+
+// Remove Pet Function
+function removePet(index) {
+    salon.pets.splice(index, 1);
+    updatePetCount();
+    displayRow();
+    calculateAverageAge();
+    displayInfo();
+    showNotification("Pet removed successfully!", "success");
+}
+
+// Edit Pet Function
+function editPet(index) {
+    let pet = salon.pets[index];
+    editIndex = index;
+
+    $("#pet-name").val(pet.name);
+    $("#pet-age").val(pet.age);
+    $("#pet-gender").val(pet.gender);
+    $("#pet-breed").val(pet.breed);
+    $("#pet-service").val(pet.service);
+    $("#pet-type").val(pet.type);
+    $("#pet-color").val(pet.color);
+    $("#payment-method").val(pet.payment);
+}
+
+// Show Notification Function
+function showNotification(message, type) {
+    // Remove any existing notifications
+    $("#notification").remove();
+
+    // Create a new notification element
+    let notification = $(`<div id="notification" class="alert alert-${type} mt-3">${message}</div>`);
+
+    // Insert the notification below the form
+    $("#pet-form").after(notification);
+
+    // Automatically remove the notification after 3 seconds
+    setTimeout(() => notification.fadeOut(), 3000);
+}
+
+// Initialize Form Submission
+$(document).ready(function () {
+    $("#pet-form").on("submit", registerPet);
+});
+
+// Initialize with Sample Data
+function init() {
+    let pet1 = new Pet("Buddy", 3, "Male", "Golden Retriever", "Grooming", "Dog", "Golden", "Cash");
+    let pet2 = new Pet("Misty", 2, "Female", "Siamese", "Nail Trim", "Cat", "White", "Credit Card");
+    let pet3 = new Pet("Rocky", 4, "Male", "Bulldog", "Bath", "Dog", "Brown", "Paypal");
+
+    salon.pets.push(pet1, pet2, pet3);
+
+    updatePetCount();
+    displayRow();
+    calculateAverageAge();
+    displayInfo();
+}
+
+function displayInfo() {
+    // Contadores para cada servicio
+    let groomingTotal = 0;
+    let nailTrimTotal = 0;
+    let bathTotal = 0;
+
+    // Iterar sobre las mascotas y contar los servicios
+    for (let i = 0; i < salon.pets.length; i++) {
+        switch (salon.pets[i].service) {
+            case "Grooming":
+                groomingTotal++;
+                break;
+            case "Nail Trim":
+                nailTrimTotal++;
+                break;
+            case "Bath":
+                bathTotal++;
+                break;
+        }
+    }
+
+    // Mostrar los totales en la pantalla
+    document.getElementById("gTotal").textContent = groomingTotal;
+    document.getElementById("nTotal").textContent = nailTrimTotal;
+    document.getElementById("bTotal").textContent = bathTotal;
+}
+
+window.onload = init;
