@@ -1,7 +1,7 @@
 // Salon Services Object
 let salonServices = {
     name: "Pet Salon Services",
-    services: []
+    services: readServices() // Load services from local storage on page load
 };
 
 class Service {
@@ -23,12 +23,12 @@ function registerService(event) {
     }
 
     let newService = new Service(description, price);
-
     salonServices.services.push(newService);
 
     displayServiceRow();
     clearServiceForm();
     showNotification("Service registered successfully!", "success");
+    save(salonServices.services); // Save the entire array of services
 }
 
 function displayServiceRow() {
@@ -57,6 +57,7 @@ function removeService(index) {
     salonServices.services.splice(index, 1);
     displayServiceRow();
     showNotification("Service removed successfully!", "success");
+    save(salonServices.services); // Update local storage
 }
 
 function clearServiceForm() {
@@ -64,19 +65,13 @@ function clearServiceForm() {
 }
 
 function showNotification(message, type) {
-    // Remove any existing notifications
     $("#notification-container").empty();
-
-    // Create a new notification element
     let notification = $(`<div class="alert alert-${type} mt-3">${message}</div>`);
-
-    // Append the notification to the container
     $("#notification-container").append(notification);
-
-    // Automatically remove the notification after 3 seconds
     setTimeout(() => notification.fadeOut(), 3000);
 }
 
 $(document).ready(function () {
     $("#service-form").on("submit", registerService);
+    displayServiceRow(); // Display existing services on page load
 });
