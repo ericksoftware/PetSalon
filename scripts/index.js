@@ -8,12 +8,12 @@ const services = [
     { 
         name: "Nail Trim", 
         description: "Professional nail trimming.",
-        image: "../img/nail.jpg"
+        image: "img/nail.jpg"
     },
     { 
         name: "Bath", 
         description: "Relaxing bath and cleaning.",
-        image: "../img/bath.jpg"
+        image: "img/bath.jpg"
     },
 ];
 
