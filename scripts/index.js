@@ -18,12 +18,12 @@ const services = [
 ];
 
 const petTypes = [
-    { name: "Dog", image: "../img/images_1.jpg" },
-    { name: "Cat", image: "../img/cat_1.jpg" },
-    { name: "Axolotl", image: "../img/axolot.jpg" },
-    { name: "Dragon", image: "../img/dragon.jpg" },
-    { name: "Mermaid", image: "../img/mermaid_1.jpg" },
-    { name: "Velociraptor", image: "../img/valo.jpg"}
+    { name: "Dog", image: "img/images_1.jpg" },
+    { name: "Cat", image: "img/cat_1.jpg" },
+    { name: "Axolotl", image: "img/axolot.jpg" },
+    { name: "Dragon", image: "img/dragon.jpg" },
+    { name: "Mermaid", image: "img/mermaid_1.jpg" },
+    { name: "Velociraptor", image: "img/valo.jpg"}
 ];
 
 // Function to display services
