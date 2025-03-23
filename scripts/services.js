@@ -1,7 +1,7 @@
 // Salon Services Object
 let salonServices = {
     name: "Pet Salon Services",
-    services: readServices() // Load services from local storage on page load
+    services: readServices() // load services from local storage on page load
 };
 
 class Service {
@@ -28,12 +28,12 @@ function registerService(event) {
     displayServiceRow();
     clearServiceForm();
     showNotification("Service registered successfully!", "success");
-    save(salonServices.services); // Save the entire array of services
+    save(salonServices.services); // the entire array of services
 }
 
 function displayServiceRow() {
     let tableBody = $("#service-table-body");
-    tableBody.empty(); // Clear previous content
+    tableBody.empty(); // previous content
 
     salonServices.services.forEach((service, index) => {
         let price = typeof service.price === "number" && !isNaN(service.price)
@@ -57,7 +57,7 @@ function removeService(index) {
     salonServices.services.splice(index, 1);
     displayServiceRow();
     showNotification("Service removed successfully!", "success");
-    save(salonServices.services); // Update local storage
+    save(salonServices.services); // local storage
 }
 
 function clearServiceForm() {
@@ -73,5 +73,5 @@ function showNotification(message, type) {
 
 $(document).ready(function () {
     $("#service-form").on("submit", registerService);
-    displayServiceRow(); // Display existing services on page load
+    displayServiceRow(); // existing services on page load
 });
