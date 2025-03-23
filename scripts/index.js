@@ -3,7 +3,7 @@ const services = [
     { 
         name: "Grooming", 
         description: "Full grooming service for your pet.",
-        image: "../img/grooming_1.jpg" 
+        image: "img/grooming_1.jpg" 
     },
     { 
         name: "Nail Trim", 
